@@ -1,5 +1,7 @@
 from fighter.fighter import Fighter
+from fighter.fighter_controller import FighterController
 from fighter.attack import Attack
+
 from player.player import Player
 
 def run():
