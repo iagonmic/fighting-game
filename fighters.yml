@@ -1,0 +1,18 @@
+ryu:
+  max_health: 200
+  attacks:
+    soco:
+      damage: 20
+      stamina: 20
+    bloqueio:
+      damage: 0
+      stamina: 5
+ken:
+  max_health: 200
+  attacks:
+    soco:
+      damage: 30
+      stamina: 10
+    bloqueio:
+      damage: 0
+      stamina: 5

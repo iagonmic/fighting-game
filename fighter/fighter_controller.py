@@ -1,3 +1,5 @@
+import yaml
+
 class FighterController:
 
     def __init__(self):
@@ -10,5 +12,11 @@ class FighterController:
     def get_fighters(self):
         return self.fighters
 
-    def load():
-        pass
+    def load(self):
+        with open('fighters.yml', 'r') as f:
+            data = yaml.safe_load(f)
+            for fighter in data.items():
+                self.fighters.append(fighter)
+
+#controller = FighterController()
+#print(controller.fighters)
