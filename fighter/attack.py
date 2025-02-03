@@ -10,3 +10,6 @@ class Attack:
     
     def get_needed_stamina(self):
         return self.needed_stamina
+    
+    def __repr__(self):
+        return f"{self.name}, {self.damage}, {self.needed_stamina}"

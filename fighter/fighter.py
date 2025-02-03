@@ -1,8 +1,8 @@
-from fighter.attack import Attack
+from attack import Attack
 
 class Fighter:
 
-    def __init__(self, name: str, max_health: int, attacks: list[Attack]):
+    def __init__(self, name: str, max_health: int, attacks: list[Attack]=[]):
         self.name = name
         self.health = max_health
         self.max_health = max_health
@@ -41,4 +41,10 @@ class Fighter:
         enemy_fighter.damage(damage)
 
         return enemy_fighter.is_dead()
-        
+    
+    def add_attack(self, attack: Attack):
+        if not attack in self.attacks:
+            self.attacks.append(attack)
+
+    def __repr__(self):
+        return f'Nome do lutador: {self.name}, vida: {self.health}, ataques: {self.attacks}'

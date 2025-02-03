@@ -11,12 +11,11 @@ def run():
 
     print("Selecione o lutador do primeiro jogador: ")
 
+    print(controller.keys())
+
     fp_fighter = 
     
     fp = Player(fp_name)
-    
-    print(controller.keys())
-    first_player_fighter = input("Selecione o seu pr")
 
     first_player_fighter = Fighter('Ryu', 200, [
         Attack('Bloqueio', damage=0, needed_stamina=5),
@@ -43,6 +42,8 @@ def select_fighter(controller: FighterController):
 
     for i, fighter in enumerate(controller.fighters):
         print(f"{i}: {fighter}")
+    
+    return fighter
 
 if __name__ == "__main__":
     run()
