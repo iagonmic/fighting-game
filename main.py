@@ -37,13 +37,5 @@ def run():
 
     print(ken.get_health())
 
-def select_fighter(controller: FighterController):
-    print("Os lutadores disponíveis são:")
-
-    for i, fighter in enumerate(controller.fighters):
-        print(f"{i}: {fighter}")
-    
-    return fighter
-
 if __name__ == "__main__":
     run()

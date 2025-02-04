@@ -12,4 +12,4 @@ class Attack:
         return self.needed_stamina
     
     def __repr__(self):
-        return f"{self.name}, {self.damage}, {self.needed_stamina}"
+        return f"Nome do ataque: {self.name}, dano: {self.damage}, stamina: {self.needed_stamina}"

@@ -2,7 +2,7 @@ from attack import Attack
 
 class Fighter:
 
-    def __init__(self, name: str, max_health: int, attacks: list[Attack]=[]):
+    def __init__(self, name: str, max_health: int, attacks: list[Attack]):
         self.name = name
         self.health = max_health
         self.max_health = max_health
