@@ -1,4 +1,4 @@
-from attack import Attack
+from .attack import Attack
 
 class Fighter:
 

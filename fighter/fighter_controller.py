@@ -1,5 +1,5 @@
 import yaml
-from fighter import Fighter, Attack
+from fighter.fighter import Fighter, Attack
 
 class FighterController:
 
@@ -28,6 +28,13 @@ class FighterController:
 
                 if not fighter in self.fighters:
                     self.fighters.append(fighter)
+    
+    def remove_fighter(self, fighter_name):
+        for i, fighter in enumerate(self.fighters):
+            if fighter.name == fighter_name:
+                del self.fighters[i]
+                return True
+        return False
 
 #controller = FighterController()
 #print(controller.fighters)
