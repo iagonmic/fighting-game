@@ -1,6 +1,7 @@
 from fighter.fighter import Fighter
 from fighter.fighter_controller import FighterController
 from fighter.attack import Attack
+from fighter.fighter_rounds import FightRounds
 
 from player.player import Player
 
@@ -19,12 +20,8 @@ def run():
     ])
     second_player.add_fighter(ken)
 
-    print(ken.get_health())
-
-    soco_ryu = ryu.get_attack(1)
-    ryu.attack(first_player, second_player, soco_ryu)
-
-    print(ken.get_health())
+    game = FightRounds(first_player, second_player)
+    game.start_round()
 
 if __name__ == "__main__":
     run()
