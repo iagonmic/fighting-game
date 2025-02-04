@@ -1,3 +1,6 @@
+import yaml
+from fighter import Fighter, Attack
+
 class FighterController:
 
     def __init__(self):
@@ -10,5 +13,21 @@ class FighterController:
     def get_fighters(self):
         return self.fighters
 
-    def load():
-        pass
+    def load(self):
+        with open('fighters.yml', 'r') as f:
+            data = yaml.safe_load(f)
+            for character in data.items():
+                c_name = character[0]
+                c_atts = character[1]
+
+                fighter = Fighter(c_name, c_atts['max_health'], attacks = [])
+
+                for key, value in c_atts['attacks'].items():
+                    attack = Attack(key, damage=value['damage'], needed_stamina=value['stamina'])
+                    fighter.add_attack(attack)
+
+                if not fighter in self.fighters:
+                    self.fighters.append(fighter)
+
+#controller = FighterController()
+#print(controller.fighters)

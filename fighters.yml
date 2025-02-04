@@ -1,0 +1,18 @@
+Ryu:
+  max_health: 200
+  attacks:
+    Soco:
+      damage: 20
+      stamina: 20
+    Bloqueio:
+      damage: 0
+      stamina: 5
+Ken:
+  max_health: 200
+  attacks:
+    Soco:
+      damage: 30
+      stamina: 10
+    Bloqueio:
+      damage: 0
+      stamina: 5

@@ -6,8 +6,19 @@ from fighter.fighter_rounds import FightRounds
 from player.player import Player
 
 def run():
-    first_player = Player('Rafael')
-    ryu = Fighter('Ryu', 200, [
+    controller = FighterController()
+
+    fp_name = input("Digite o nome do primeiro jogador: ")    
+
+    print("Selecione o lutador do primeiro jogador: ")
+
+    print(controller.keys())
+
+    fp_fighter = 
+    
+    fp = Player(fp_name)
+
+    first_player_fighter = Fighter('Ryu', 200, [
         Attack('Bloqueio', damage=0, needed_stamina=5),
         Attack('Soco', damage=20, needed_stamina=20)
     ])
