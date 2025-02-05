@@ -31,9 +31,6 @@ class FighterController:
     
     def remove_fighter(self, fighter_name):
         for i, fighter in enumerate(self.fighters):
-            print(fighter)
-            print(fighter_name)
-            print(fighter.name)
             if fighter.name == fighter_name:
                 print('feito')
                 del self.fighters[i]
