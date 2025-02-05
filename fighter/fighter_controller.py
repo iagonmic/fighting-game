@@ -32,7 +32,6 @@ class FighterController:
     def remove_fighter(self, fighter_name):
         for i, fighter in enumerate(self.fighters):
             if fighter.name == fighter_name:
-                print('feito')
                 del self.fighters[i]
                 return True
         return False
