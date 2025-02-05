@@ -37,7 +37,7 @@ def select_fighter(controller:FighterController, player:Player):
     selected_fighter = temp_dict[selected_fighter_index - 1]
 
     player.add_fighter(selected_fighter)
-    controller.remove_fighter(selected_fighter)
+    controller.remove_fighter(selected_fighter.name)
 
     return selected_fighter
 
