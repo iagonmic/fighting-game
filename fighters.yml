@@ -14,7 +14,7 @@ Ryu:
       stamina: 15
       accuracy: 0.85
 
-Ken:
+Jorge:
   max_health: 200
   attacks:
     Soco:
@@ -30,7 +30,7 @@ Ken:
       stamina: 25
       accuracy: 0.8
 
-Chun-Li:
+Cláudio:
   max_health: 180
   attacks:
     Soco Rápido:
