@@ -9,6 +9,11 @@ class FightRounds:
         self.player2 = player2
         self.rounds = 0
         
+    def regen_stamina(self, player):
+        regen_amount = 10  
+        player.stamina = min(30, player.stamina + regen_amount)
+        print(f"{player.name} regenerou {regen_amount} de stamina. Stamina atual: {player.stamina}")
+
     def start_round(self):
         while True:
             current_player = self.player1 if self.rounds % 2 == 0 else self.player2
@@ -42,6 +47,7 @@ class FightRounds:
                 print(f"{opponent.get_active_fighter().name} foi derrotado! {current_player.name} vence!")
                 break
             
+            self.regen_stamina(current_player)
             self.rounds += 1
 
     
