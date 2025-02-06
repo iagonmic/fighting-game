@@ -1,4 +1,6 @@
-from .attack import Attack
+from fighter.attack import Attack
+
+import random
 
 class Fighter:
 
@@ -32,6 +34,11 @@ class Fighter:
         
         stamina = attack.get_needed_stamina()
         if not actor.has_stamina(stamina):
+            return False
+        
+        accuracy = attack.get_accuracy()
+        if random.randint(0, 100) > accuracy:
+            print("O oponente esquivou do ataque!")
             return False
 
         actor.consume_stamina(stamina)

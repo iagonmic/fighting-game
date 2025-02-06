@@ -23,7 +23,12 @@ class FighterController:
                 fighter = Fighter(c_name, c_atts['max_health'], attacks = [])
 
                 for key, value in c_atts['attacks'].items():
-                    attack = Attack(key, damage=value['damage'], needed_stamina=value['stamina'])
+                    attack = Attack(
+                        name=key, 
+                        damage=value['damage'], 
+                        needed_stamina=value['stamina'],
+                        accuracy=value['accuracy']
+                    )
                     fighter.add_attack(attack)
 
                 if not fighter in self.fighters:
@@ -35,6 +40,3 @@ class FighterController:
                 del self.fighters[i]
                 return True
         return False
-
-#controller = FighterController()
-#print(controller.fighters)
