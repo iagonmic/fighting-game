@@ -11,8 +11,10 @@ class FightRounds:
         
     def start_round(self):
         while True:
-            current_player = self.player1 if self.rounds % 2 == 0 else self.player2
-            opponent = self.player2 if self.rounds % 2 == 0 else self.player1
+            round_pair = self.rounds % 2 == 0
+
+            current_player = self.player1 if round_pair else self.player2
+            opponent = self.player2 if round_pair else self.player1
 
             print("-" * 60)
             print(f"{current_player.name}, é o seu turno")
