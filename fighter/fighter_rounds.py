@@ -2,6 +2,9 @@ from fighter.fighter import Fighter
 from fighter.attack import Attack
 from player.player import Player
 
+from platform import platform
+from os import system
+
 class FightRounds:
 
     def __init__(self, player1, player2):
@@ -22,6 +25,7 @@ class FightRounds:
             opponent = self.player2 if round_pair else self.player1
 
             print("-" * 60)
+
             print(f"{current_player.name}, é o seu turno")
             fighter = current_player.get_active_fighter()
 
@@ -32,6 +36,8 @@ class FightRounds:
             while True:
                 try:
                     choice = int(input("Digite uma ação: "))
+                    print('-' * 60)
+                    self.clear_screen()
                     action = fighter.get_attack(choice)
                     if action and current_player.has_stamina(action.needed_stamina):
                         break
@@ -53,5 +59,8 @@ class FightRounds:
             self.rounds += 1
 
     
-
-
+    def clear_screen(self):
+        if platform == "Windows":
+            system('cls')
+        else:
+            system('clear')
