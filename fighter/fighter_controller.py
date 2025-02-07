@@ -27,7 +27,7 @@ class FighterController:
                         name=key, 
                         damage=value['damage'], 
                         needed_stamina=value['stamina'],
-                        accuracy=value['accuracy']
+                        accuracy=value['accuracy'] * 100
                     )
                     fighter.add_attack(attack)
 
