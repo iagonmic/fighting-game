@@ -8,14 +8,30 @@ from os import system
 class FightRounds:
 
     def __init__(self, player1, player2):
-        self.player1 = player1
-        self.player2 = player2
-        self.rounds = 0
+        self.__player1 = player1
+        self.__player2 = player2
+        self.__rounds = 0
+
+    # Proteção dos atributos certos via property
+    @property
+    def player1(self):
+        return self.__player1
+
+    @property
+    def player2(self):
+        return self.__player2
+
+    @property
+    def rounds(self):
+        return self.__rounds
         
     def regen_stamina(self, player):
-        regen_amount = 10  
-        player.stamina = min(30, player.stamina + regen_amount)
-        print(f"{player.name} regenerou {regen_amount} de stamina. Stamina atual: {player.stamina}")
+        regen_amount = 10
+        try:
+            player.stamina = min(30, player.stamina + regen_amount)
+            print(f"{player.name} regenerou {regen_amount} de stamina. Stamina atual: {player.stamina}")
+        except AttributeError:
+            print("Erro: o jogador não possui um atributo de stamina.")
 
     def start_round(self):
         while True:
@@ -25,9 +41,15 @@ class FightRounds:
             opponent = self.player2 if round_pair else self.player1
 
             print("-" * 60)
-
             print(f"{current_player.name}, é o seu turno")
-            fighter = current_player.get_active_fighter()
+
+            try:
+                fighter = current_player.get_active_fighter()
+                if fighter is None:
+                    raise ValueError("Erro: Nenhum lutador ativo encontrado")
+            except AttributeError:
+                print("Erro: o jogador não possui um lutador ativo")
+                break
 
             print("Escolha uma ação: ")
             for i, attack in enumerate(fighter.attacks):
