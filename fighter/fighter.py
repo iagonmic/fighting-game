@@ -3,55 +3,109 @@ from fighter.attack import Attack
 import random
 
 class Fighter:
-
+    ### Tornando os atributos privados
     def __init__(self, name: str, max_health: int, attacks: list[Attack]):
-        self.name = name
-        self.health = max_health
-        self.max_health = max_health
-        self.attacks = attacks
+        self.__name = name
+        self.__max_health = max_health if max_health > 0 else 100  # Saúde mínima padrão
+        self.__health = self.__max_health
+        self.__attacks = attacks if isinstance(attacks, list) else []  # Garante que seja uma lista
+
+    ### Usando property para proteger corretamente os métodos
+    @property
+    def name(self):
+        return self.__name
+    
+    @property
+    def max_health(self):
+        return self.__max_health
+    
+    @property
+    def health(self):
+        return self.__health
+    
+    @health.setter
+    def health(self, value):
+        if not isinstance(value, (int, float)):
+            ###
+            raise ValueError("O valor da saúde deve ser um número.")
+        self.__health = max(0, min(self.__max_health, value))
+
+    @property
+    def attacks(self):
+        return self.__attacks
 
     def get_health(self):
-        return self.health
+        return self.__health
 
-    def set_health(self, health):
-        self.health = max(0, min(self.max_health, health))
+    def damage(self, damage: int):
+        try:
+            if damage < 0:
+                ###
+                raise ValueError("O dano não pode ser negativo.")
+            self.health -= damage
+            ###
+        except ValueError as e:
+            print(f"Erro ao aplicar dano: {e}")
 
-    def damage(self, damage):
-        self.set_health(self.get_health() - damage)
 
     def is_dead(self):
-        return self.health <= 0
+        return self.__health <= 0
 
-    def get_attack(self, index):
-        if len(self.attacks) == 0 or index >= len(self.attacks):
+    def get_attack(self, index: int):
+        try:
+            if not isinstance(index, int):
+                ###
+                raise ValueError("O índice deve ser um número inteiro.")
+            return self.__attacks[index] if 0 <= index < len(self.__attacks) else None
+        ### 
+        except IndexError:
+            print("Erro: O índice do ataque está fora dos limites.")
             return None
-
-        return self.attacks[index]
+        ###
+        except ValueError as e:
+            print(f"Erro: {e}")
+            return None
     
     def attack(self, actor, enemy, attack: Attack) -> bool:
-        if not attack in self.attacks:
-            return False
-        
-        stamina = attack.get_needed_stamina()
-        if not actor.has_stamina(stamina):
-            return False
-        
-        accuracy = attack.get_accuracy()
-        if random.randint(0, 100) > accuracy:
-            print("O oponente esquivou do ataque!")
-            return False
+        """Executa o ataque no inimigo, considerando precisão e consumo de stamina."""
+        try:
+            if attack not in self.__attacks:
+                raise ValueError("O ataque não pertence a este lutador.")
 
-        actor.consume_stamina(stamina)
-        damage = attack.damage
+            stamina_needed = attack.needed_stamina
+            if not actor.has_stamina(stamina_needed):
+                print("Stamina insuficiente para este ataque.")
+                return False
 
-        enemy_fighter = enemy.get_active_fighter()
-        enemy_fighter.damage(damage)
+            if random.randint(0, 100) > attack.accuracy:
+                print("O oponente esquivou do ataque!")
+                return False
 
-        return enemy_fighter.is_dead()
+            actor.consume_stamina(stamina_needed)
+
+            enemy_fighter = enemy.get_active_fighter()
+            enemy_fighter.damage(attack.damage)
+
+            return enemy_fighter.is_dead()
+
+        ###
+        except AttributeError as e:
+            print(f"Erro ao executar ataque: {e}")
+            return False
+        except ValueError as e:
+            print(f"Erro: {e}")
+            return False
     
     def add_attack(self, attack: Attack):
-        if not attack in self.attacks:
-            self.attacks.append(attack)
+        try:
+            if not isinstance(attack, Attack):
+                raise TypeError("O ataque deve ser uma instância de Attack.")
+            
+            if attack not in self.__attacks:
+                self.__attacks.append(attack)
+        ###
+        except TypeError as e:
+            print(f"Erro ao adicionar ataque: {e}")
 
     def __repr__(self):
-        return f'Nome do lutador: {self.name}, vida: {self.health}, ataques: {self.attacks}'
+        return f'Lutador: {self.__name}, Vida: {self.__health}, Ataques: {self.__attacks}'
