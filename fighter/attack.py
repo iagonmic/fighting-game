@@ -1,5 +1,4 @@
 class Move:
-    """Superclasse genérica para qualquer tipo de movimento no jogo (ataques, magias, defesas)."""
     def __init__(self, name: str, damage: int, accuracy: float):
         self.__name = name
         self.__damage = damage
