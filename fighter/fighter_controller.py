@@ -12,8 +12,8 @@ class FighterController:
         return list(self.__fighters) # Decorador para poder acessar de maneira segura o atributo fighters
 
     def add_fighter(self, fighter):
-        if fighter not in self._fighters:
-            self._fighters.append(fighter)
+        if fighter not in self.__fighters:
+            self.__fighters.append(fighter)
 
     def get_fighters(self):
         return self.__fighters
