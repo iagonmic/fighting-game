@@ -2,8 +2,8 @@ from fighter.fighter import Fighter
 from fighter.attack import Attack
 from player.player import Player
 
-from platform import platform
-from os import system
+import sys
+import os
 
 class FightRounds:
 
@@ -12,7 +12,7 @@ class FightRounds:
         self.__player2 = player2
         self.__rounds = 0
 
-    # Proteção dos atributos certos via property
+    # Encapsulamento dos atributos certos via property
     @property
     def player1(self):
         return self.__player1
@@ -25,6 +25,7 @@ class FightRounds:
     def rounds(self):
         return self.__rounds
         
+    ### Método de instância
     def regen_stamina(self, player):
         regen_amount = 10
         try:
@@ -34,6 +35,16 @@ class FightRounds:
         # Caso o jogador não tenha o atributo stamina 
         except AttributeError:
             print("Erro: o jogador não possui um atributo de stamina.")
+
+    def clear_screen(self):
+        try:
+            if sys.platform == 'win32':
+                os.system('cls')
+            else:
+                os.system('clear')
+        ###
+        except Exception as e:
+            print(f"Erro ao limpar a tela: {e}")
 
     def start_round(self):
         while True:
@@ -82,6 +93,7 @@ class FightRounds:
                 continue  # Pula para a próxima iteração caso o ataque falhe
 
             opponent_fighter = opponent.get_active_fighter()
+            self.clear_screen()
             print(f"{opponent_fighter.name} tem {opponent_fighter.health} de vida")
             if opponent_fighter.is_dead():
                 print(f"{opponent_fighter.name} foi derrotado! {current_player.name} vence!")
@@ -89,14 +101,3 @@ class FightRounds:
             
             self.regen_stamina(current_player)
             self.__rounds += 1
-
-    
-    def clear_screen(self):
-        try:
-            if platform.system() == "Windows":
-                system('cls')
-            else:
-                system('clear')
-        ###
-        except Exception as e:
-            print(f"Erro ao limpar a tela: {e}")

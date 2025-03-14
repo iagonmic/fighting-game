@@ -4,7 +4,7 @@ class Player:
     def __init__(self, name: str):
         self.__name = name
         self.__stamina = 30
-        self.__active_fighter: Fighter = None
+        self.__active_fighter: Fighter = None ### Composição
         self.__fighters = []
 
     @property
