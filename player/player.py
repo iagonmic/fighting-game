@@ -1,6 +1,30 @@
 from fighter.fighter import Fighter
+from abc import ABC, abstractmethod
 
-class Player:
+class IPlayer(ABC): ## Implementando a interface para a terceira unidade, deixando a classe Player mais limpa e fácil de entender
+    @property
+    @abstractmethod
+    def name(self):
+        pass
+
+    @property
+    @abstractmethod
+    def stamina(self):
+        pass
+
+    @abstractmethod
+    def has_stamina(self, stamina: int) -> bool:
+        pass
+
+    @abstractmethod
+    def consume_stamina(self, stamina: int):
+        pass
+
+    @abstractmethod
+    def add_fighter(self, fighter):
+        pass
+
+class Player(IPlayer):
     def __init__(self, name: str):
         self.__name = name
         self.__stamina = 30

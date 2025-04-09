@@ -1,8 +1,34 @@
 from fighter.attack import Attack
+from abc import ABC, abstractmethod
 
 import random
 
-class Fighter:
+class IAttackable(ABC):
+    @abstractmethod
+    def damage(self, damage: int):
+        pass
+
+    @abstractmethod
+    def is_dead(self) -> bool:
+        pass
+
+class ICombatant(IAttackable):
+    @abstractmethod
+    def attack(self, actor, enemy, attack) -> bool:
+        pass
+
+class IFighter(ICombatant): ## Implementando a interface para a terceira unidade, deixando a classe Fighter mais limpa e fácil de entender
+    @property
+    @abstractmethod
+    def name(self):
+        pass
+
+    @property
+    @abstractmethod
+    def health(self):
+        pass
+
+class Fighter(IFighter):
     ### Tornando os atributos privados
     def __init__(self, name: str, max_health: int, attacks: list[Attack]):
         self.__name = name
@@ -109,3 +135,19 @@ class Fighter:
 
     def __repr__(self):
         return f'Lutador: {self.__name}, Vida: {self.__health}, Ataques: {self.__attacks}'
+
+class MagicFighter(Fighter):
+    def __init__(self, name: str, max_health: int, attacks: list[Attack], mana: int):
+        super().__init__(name, max_health, attacks)
+        self.__mana = mana
+
+    @property
+    def mana(self):
+        return self.__mana
+
+    def attack(self, actor, enemy, attack: Attack) -> bool:
+        if self.__mana < 10:
+            print("Mana insuficiente para realizar o ataque mágico.")
+            return False
+        self.__mana -= 10
+        return super().attack(actor, enemy, attack)

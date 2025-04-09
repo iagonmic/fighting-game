@@ -1,13 +1,25 @@
-from fighter.fighter import Fighter
-from fighter.attack import Attack
-from player.player import Player
+from player.player import IPlayer
+from abc import ABC, abstractmethod
 
 import sys
 import os
 
-class FightRounds:
+class IFightRounds(ABC):
+    @abstractmethod
+    def start_round(self):
+        pass
 
-    def __init__(self, player1, player2):
+    @abstractmethod
+    def regen_stamina(self, player):
+        pass
+
+    @abstractmethod
+    def clear_screen(self):
+        pass
+
+class FightRounds(IFightRounds):
+
+    def __init__(self, player1: IPlayer, player2: IPlayer): #
         self.__player1 = player1
         self.__player2 = player2
         self.__rounds = 0
